@@ -1,0 +1,79 @@
+Problem Description
+Overview
+You are given a geometry diagram and a corresponding question. Your task is to predict the correct final answer for each problem.
+
+This is a diagram-based geometry question answering challenge that evaluates multimodal reasoning over geometric figures and problem text. The geometry problems cover topics such as triangles, circles, angles, area calculations, and spatial reasoning. These represent scenarios where mathematical reasoning requires interpreting geometric diagrams, understanding spatial relationships, and applying geometric principles to solve mathematical problems.
+
+Dataset
+Domain: Geometry reasoning
+Task: Predict the correct answer from a geometry diagram and problem statement
+Training size: 2,401 examples
+Test size: 601 examples
+Inputs: one diagram image and one geometry question per row
+Image Format
+Format: PNG images generated from decoded diagram payloads
+Content: geometric diagrams, labeled figures, and spatial constructions
+Resolution: variable
+Dataset Files
+train.csv: Training rows with diagram questions and labels
+test.csv: Test rows with diagram questions only
+train_images/: Training diagram images
+test_images/: Test diagram images
+sample_submission.csv: Submission template
+CSV Format
+train.csv
+
+Column	Data Type	Description
+id	Integer	Training row identifier
+image_id	String	Training image filename
+question	String	Geometry problem text
+label	String	Ground-truth final answer
+test.csv
+
+Column	Data Type	Description
+id	Integer	Test row identifier
+image_id	String	Test image filename
+question	String	Geometry problem text
+sample_submission.csv
+
+Column	Data Type	Description
+id	Integer	Row identifier matching test.csv
+label	String	Predicted answer
+Submission
+Submit a CSV file with exactly two columns:
+
+id: Row identifier matching test.csv
+label: Predicted final answer
+Example Submission
+id,label  
+0,42  
+1,3.14  
+2,90  
+3,12.5  
+4,triangle  
+Evaluation
+Metric: Exact Match Accuracy
+
+Predictions and references are lowercased, trimmed, and whitespace-normalized before comparison.
+
+Accuracy = number of exact matches / total number of test examples  
+The final score is the average exact match accuracy across all test rows.
+
+Method Requirements
+PRIORITY FOCUS: This is a Model Training and Fine-Tuning Competition.
+
+Evaluation will only proceed for strictly fine-tuned open-weight networks. Zero-shot or prompt-only approaches are not permitted for this benchmark.
+
+Training Modality: We recommend Supervised Fine-Tuning (SFT) over curated reasoning traces or Reinforcement Learning (PPO/GRPO) to instill verifiable logical derivation capabilities. The goal is to evaluate whether fine-tuned models can generalize mathematical reasoning from training examples to unseen geometry problems.
+
+Purely rule-based, template-based, or hardcoded systems are not permitted. This includes approaches that rely on predefined geometric rules, pattern matching, or deterministic mappings without a trained model component.
+
+Fallback mechanisms that enforce correctness are strictly disallowed if they play a central role. This includes regex-based extraction, answer post-processing, or output correction layers used to guarantee valid predictions. The fine-tuned model itself must be responsible for producing correct answers through learned reasoning.
+
+In cases where a model fails to produce a valid output, the prediction is treated as incorrect and receives a score of 0 for that example. No alternative fallback outputs or correction mechanisms are permitted.
+
+ 
+
+Expected Output
+Output to ./working/submission.csv
+
