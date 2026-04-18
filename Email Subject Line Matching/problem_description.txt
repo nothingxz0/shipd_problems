@@ -1,0 +1,193 @@
+Overview
+Email archives routinely lose the original subject line through forwarding, threading, or quoting. Reconstructing which subject belongs to which body is a useful retrieval and triage task for inbox search, legal discovery, and customer support workflows.
+
+This challenge provides a synthetic corpus of short business style emails spanning five common workflow categories: business requests, meeting invites, project updates, sales pitches, and support follow ups. Each email has a body written from a category specific template and a paired subject line written in one of three styles that vary in how tightly the subject references the body content. The corpus is entirely synthetic: all names, companies, projects, products, dates, and monetary figures are fictional. Training entity pools and test entity pools share no values, so no specific person or company name appears in both splits.
+
+Training data contains about 3000 emails, each shown as a single body paired with its one true subject.
+
+The test set is organized into 205 blocks. Each block contains four email bodies and four subject lines labeled A, B, C, and D. The four subjects in a block are exactly the original subjects of the four bodies in that block, shuffled. Your task is to recover the full body to subject mapping for every block: assign each body the letter of its original subject.
+
+All four bodies in a block share the same category, and all four subjects in a block were generated with the same difficulty tier. Category alone is not a discriminator within a block, so the task cannot be solved by category matching.
+
+Training rows do not ship with block structure. Any validation blocks you want to construct during development must be built from training data by grouping training emails by category and shuffling their true subjects within the group.
+
+Evaluation
+Submissions are scored using a weighted block level Hamming accuracy across three hidden difficulty tiers. For each block, count the fraction of body to subject assignments that match the ground truth (values in {0, 0.25, 0.5, 0.75, 1.0}) and then average across blocks within each tier. The final score is
+
+s
+c
+o
+r
+e
+=
+0.2
+⋅
+h
+a
+m
+m
+i
+n
+g
+e
+a
+s
+y
++
+0.3
+⋅
+h
+a
+m
+m
+i
+n
+g
+m
+e
+d
+i
+u
+m
++
+0.5
+⋅
+h
+a
+m
+m
+i
+n
+g
+h
+a
+r
+d
+score=0.2⋅hamming 
+easy
+​
+ +0.3⋅hamming 
+medium
+​
+ +0.5⋅hamming 
+hard
+​
+ 
+
+Higher is better. Scores fall in the range 0.0 to 1.0. Difficulty tiers are not exposed in the public files.
+
+Dataset
+The public dataset lives under dataset/public/.
+
+train.csv contains training emails with columns:
+id integer identifier
+category string label naming the email category
+body string email body text
+subject string original subject line paired with the body
+test.csv contains one row per test body, 820 rows across 205 blocks:
+block_id integer block identifier from 1 to 205
+body_index integer body position within the block, one of 0, 1, 2, or 3
+body string email body text
+test_subjects.csv contains one row per subject within a block, 820 rows total:
+block_id integer block identifier that matches test.csv
+subject_letter string label, one of A, B, C, or D
+subject string subject line text
+sample_submission.csv shows the submission CSV format with a baseline assignment for every (block_id, body_index) pair.
+Submission
+Produce a CSV file with exactly three columns:
+
+block_id integer block identifier from test.csv
+body_index integer body position from test.csv, one of 0, 1, 2, or 3
+assigned_subject string letter, one of A, B, C, or D, naming the subject believed to match this body
+A correctly formatted submission looks like:
+
+block_id,body_index,assigned_subject  
+1,0,C  
+1,1,A  
+1,2,D  
+1,3,B  
+2,0,B  
+2,1,A  
+2,2,D  
+2,3,C  
+The ideal submission assigns each block's four subject letters as a permutation of {A, B, C, D}, one per body. Submissions that repeat letters within a block still grade: each body is scored independently against the ground truth letter, so partial credit is possible even for non permutations.
+
+Requirements:
+
+Every (block_id, body_index) pair in test.csv must appear exactly once
+No missing values are allowed
+assigned_subject must be one of A, B, C, D; other values count as wrong
+
+
+general rules of submission from shipd docs:
+
+A solution is a Jupyter notebook (solution.ipynb or a solution.py) that solves a challenge end-to-end. As a challenge creator, your solution proves solvability and validates the grader. As a solver, you compete on the leaderboard for a share of the $1,150-$1,250 prize pool. Solutions run in a Docker environment with Kaggle Docker libraries (pandas, numpy, scikit-learn, xgboost, lightgbm, tensorflow, pytorch, etc.).
+
+Requirements
+Self-contained — must run end-to-end without manual intervention
+Reads from ./dataset/public/ — use relative paths
+Writes only to ./working/ — outputs submission.csv
+Uses only standard Kaggle Docker libraries
+Completes in under 30 minutes (64GB RAM, NVIDIA A10G, 24GB VRAM)
+python:
+import pandas as pd
+
+# Reading data
+train = pd.read_csv('./dataset/public/train.csv')
+test = pd.read_csv('./dataset/public/test.csv')
+
+# Writing submission
+submission.to_csv('./working/submission.csv', index=False)
+
+Iterative Submissions
+We want to see your progression — not just a single final answer. Submit multiple solutions as you improve your approach. Each submission should be a solid attempt, not a rough draft.
+
+1
+First Submission — Solid Starting Point
+Data pipeline is correct, model runs end-to-end, and you're getting reasonable results.
+
+2
+Middle Submissions — Incremental Improvements
+Try feature engineering, hyperparameter tuning, or different model architectures. Each submission should show measurable progress from the previous one.
+
+3
+Final Submission — Best Effort
+Your most refined submission with the most optimal model.
+
+We recommend 3-5 solutions showing incremental improvement. Each should be a complete, working solution — not rough drafts, but genuine attempts at solving the challenge.
+Submission Credits
+Each challenge uses a credit system that limits how often you can submit solutions.
+
+Parameter	Value
+Max credits per problem	6
+Refill rate	1 every 4 hours
+Full refill time	24 hours
+Scope	Per problem (independent pools)
+Credits are consumed only on submit — creating drafts, running checks, or editing does not cost credits. Make each submission count.
+Prize Structure
+Each challenge has a $1,150-$1,250 prize pool split between the challenge creator, solvers, and rubric authors.
+
+Pool	Amount	Who receives it
+Creator	$400-$500	Challenge author (scales with novelty)
+Leaderboard	$500	1st: $250 · 2nd: $150 · 3rd: $100
+Solution	$150	Split by merit among solvers who beat the AI baseline
+Rubric	$100	Best accepted rubric submission
+You must beat the AI baseline to earn a payout. When a challenge is created, an AI agent attempts it to establish a baseline score. Only solutions that outperform this baseline are eligible for solver payouts.
+Payout Lifecycle
+After a challenge closes, payouts move through three statuses before reaching your Stripe account.
+
+Pending
+Payout computed and recorded, but not yet sent to Stripe.
+Processing
+Stripe transfer created and in transit. Typically 1-2 business days.
+Paid
+Transfer complete. Funds are in your Stripe account.
+Stripe account required. Payouts remain Pending until you have a connected Stripe account. Your earnings are safe — they'll be processed once connected. Go to shipd.ai/payouts to set up your account.
+Checklist
+Solution script runs end-to-end without errors
+Uses only Kaggle Docker environment libraries
+Reads from ./dataset/public/, writes to ./working/submission.csv
+Achieves a reasonable score (validates the task is solvable)
+Comments explain your reasoning at each step
+Clear progression from baseline to optimized (if submitting multiple)
+Rubrics

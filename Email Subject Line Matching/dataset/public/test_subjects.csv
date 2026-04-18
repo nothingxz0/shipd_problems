@@ -1,0 +1,821 @@
+block_id,subject_letter,subject
+1,A,Budget for Project Horizon
+1,B,Follow up on Stream Verbena
+1,C,Follow up on Program Kestrelhawk
+1,D,Budget for Initiative Tanager
+2,A,Budget for Workstream Elder
+2,B,Project Drift documents
+2,C,Contract for Initiative Nectarine
+2,D,Contract for Project Indigo
+3,A,Project Beacon approval
+3,B,Workstream Iris documents
+3,C,Program Poppy approval
+3,D,Workstream Junco documents
+4,A,Follow up on Project Horizon
+4,B,Contract for Stream Alyssum
+4,C,Initiative Rose documents
+4,D,Contract for Project Alder
+5,A,Budget for Initiative Marigold
+5,B,Follow up on Project Indigo
+5,C,Contract for Stream Basil
+5,D,Project Indigo approval
+6,A,Project Beacon documents
+6,B,Follow up on Project Alder
+6,C,Program Tusk documents
+6,D,Budget for Stream Alyssum
+7,A,Project Garnet approval
+7,B,Initiative Ursa documents
+7,C,Contract for Program Lark
+7,D,Contract for Stream Zebrafish
+8,A,Project Jasper approval
+8,B,Program Opal approval
+8,C,Follow up on Program Nutmeg
+8,D,Program Nutmeg documents
+9,A,Question about the external engagement lane
+9,B,About the fiscal window
+9,C,Regarding the financial outlook view
+9,D,About the period close review
+10,A,Following up on the money notes
+10,B,Thoughts on the architecture pages
+10,C,Quick note: the ledger annotations
+10,D,Following up on the build specifications
+11,A,Thoughts on the outside party angle
+11,B,Question about the extension window
+11,C,Quick note: the outside party angle
+11,D,On the agreement review
+12,A,Quick note: the money sheet
+12,B,On the counsel notes
+12,C,Thoughts on the reference dossier
+12,D,Question about the doc edits
+13,A,On the sourcing bill side
+13,B,Quick note: the sign off lane
+13,C,Following up on the external engagement lane
+13,D,Thoughts on the top nod
+14,A,Regarding the top of house go
+14,B,About the senior decision path
+14,C,Regarding the agreement review
+14,D,About the extension window
+15,A,Question about the implementation set
+15,B,Following up on the architecture pages
+15,C,On the outside party angle
+15,D,Thoughts on the sourcing bill side
+16,A,About the doc edits
+16,B,Question about the doc edits
+16,C,On the top nod
+16,D,Following up on the top nod
+17,A,Question about the risk go signal
+17,B,Following up on the doc edits
+17,C,Following up on the sign off lane
+17,D,Question about the agreement review
+18,A,Thoughts on the top nod
+18,B,About the top of house go
+18,C,Thoughts on the continuation terms
+18,D,On the extension window
+19,A,On the money sheet
+19,B,Question about the policy clearance
+19,C,On the policy clearance
+19,D,Quick note: the money notes
+20,A,About the senior decision path
+20,B,Quick note: the implementation set
+20,C,On the reference dossier
+20,D,Quick note: the sign off lane
+21,A,Question about the sourcing bill side
+21,B,Thoughts on the sourcing bill side
+21,C,Thoughts on the continuation terms
+21,D,Quick note: the roll forward piece
+22,A,On the behavior expectations
+22,B,Thoughts on the ledger annotations
+22,C,About the ledger annotations
+22,D,Question about the capability outline
+23,A,Question about the cycle outlook summary
+23,B,About the fiscal window
+23,C,Question about the feature list summary
+23,D,On the feature list summary
+24,A,About the top of house go
+24,B,Following up on the reference dossier
+24,C,Question about the architecture pages
+24,D,Thoughts on the senior decision path
+25,A,Following up on the speed targets
+25,B,Quick note: the cycle outlook summary
+25,C,Question about the target criteria
+25,D,Regarding the cycle outlook summary
+26,A,Following up on the response expectations
+26,B,Following up on the target criteria
+26,C,Following up on the policy review pass
+26,D,On the risk go signal
+27,A,Question about the load targets
+27,B,Regarding the risk go signal
+27,C,Following up on the policy review pass
+27,D,About the response expectations
+28,A,On the doc edits
+28,B,Question about the policy clearance
+28,C,Quick note: the sign off lane
+28,D,Following up on the sign off lane
+29,A,Following up on the senior decision path
+29,B,Question about the fiscal window
+29,C,About the financial outlook view
+29,D,Thoughts on the agreement review
+30,A,Following up on the accounting picture
+30,B,Question about the signed piece
+30,C,Quick note: the go ahead
+30,D,About the reference set
+31,A,Regarding the green light
+31,B,Question about the accounting picture
+31,C,Regarding the signed piece
+31,D,Following up on the ask summary
+32,A,On the revised numbers
+32,B,Question about the ask summary
+32,C,Quick note: the shared brief
+32,D,About the decision window
+33,A,Quick note: the reference set
+33,B,Following up on the signed terms
+33,C,About the expectations frame
+33,D,Thoughts on the decision window
+34,A,On the attached pack
+34,B,Quick note: the agreement draft
+34,C,On the expectations frame
+34,D,On the revised numbers
+35,A,Quick note: the attached pack
+35,B,Regarding the spending side
+35,C,Regarding the final call
+35,D,Following up on the signed piece
+36,A,Quick note: the needs list
+36,B,About the spending side
+36,C,Regarding the decision window
+36,D,Question about the signed piece
+37,A,Following up on the green light
+37,B,On the revised numbers
+37,C,About the reference set
+37,D,On the ask summary
+38,A,On the shared brief
+38,B,On the signed piece
+38,C,Thoughts on the go ahead
+38,D,Question about the accounting picture
+39,A,Following up on the signed terms
+39,B,Question about the agreement draft
+39,C,On the revised numbers
+39,D,Question about the attached pack
+40,A,About the revised numbers
+40,B,About the shared brief
+40,C,Question about the revised numbers
+40,D,Regarding the shared brief
+41,A,On the accounting picture
+41,B,Thoughts on the shared brief
+41,C,On the reference set
+41,D,Question about the money figures
+42,A,Meeting on Initiative Nectarine
+42,B,Call about Initiative Vanilla
+42,C,Workstream Larch sync
+42,D,Review for Stream Driftwood
+43,A,Stream Walnut sync
+43,B,Review for Workstream Nightshade
+43,C,Workshop for Initiative Oleander
+43,D,Review for Project Beacon
+44,A,Review for Stream Walnut
+44,B,Call about Workstream Nightshade
+44,C,Call about Project Drift
+44,D,Review for Initiative Marigold
+45,A,Meeting on Project Horizon
+45,B,Review for Program Opal
+45,C,Workshop for Stream Alyssum
+45,D,Call about Program Nutmeg
+46,A,Call about Initiative Nectarine
+46,B,Workshop for Stream Xenon
+46,C,Call about Stream Driftwood
+46,D,Project Drift sync
+47,A,Workstream Fernleaf sync
+47,B,Call about Project Evergreen
+47,C,Meeting on Initiative Rose
+47,D,Call about Workstream Iris
+48,A,Call about Initiative Ursa
+48,B,Workshop for Workstream Kaleido
+48,C,Workshop for Project Horizon
+48,D,Review for Initiative Rose
+49,A,Initiative Peony sync
+49,B,Meeting on Initiative Nectarine
+49,C,Workshop for Program Magnolia
+49,D,Workshop for Project Drift
+50,A,About the architecture walkthrough
+50,B,For the check point session
+50,C,For the third party line
+50,D,Scheduling the voice connection
+51,A,On the launch sit down
+51,B,For the architecture walkthrough
+51,C,Setting up the visual pass
+51,D,On the opening gathering
+52,A,For the alignment beat
+52,B,Setting up the top of house conversation
+52,C,On the multi group align
+52,D,Scheduling the executive forum slot
+53,A,For the layout critique
+53,B,Planning the top of house conversation
+53,C,On the layout critique
+53,D,Planning the opening gathering
+54,A,Setting up the plan building day
+54,B,For the senior circle time
+54,C,Booking the executive forum slot
+54,D,For the direction setting day
+55,A,Booking the outside party line up
+55,B,Planning the team voice time
+55,C,Booking the external dial in
+55,D,Booking the voice connection
+56,A,Setting up the executive forum slot
+56,B,Planning the senior circle time
+56,C,On the alignment beat
+56,D,For the seven day touchpoint
+57,A,About the gate check
+57,B,On the direction setting day
+57,C,Booking the progress review slot
+57,D,Scheduling the direction setting day
+58,A,Planning the learning day
+58,B,About the team only bridge
+58,C,About the in house chat
+58,D,Scheduling the focused cohort day
+59,A,About the visual pass
+59,B,Setting up the launch sit down
+59,C,For the architecture walkthrough
+59,D,On the start of work session
+60,A,About the multi unit touchpoint
+60,B,Scheduling the learning day
+60,C,Booking the skills day
+60,D,Scheduling the multi unit touchpoint
+61,A,Booking the progress review slot
+61,B,Booking the opening gathering
+61,C,For the gate check
+61,D,Setting up the start up discussion
+62,A,Planning the opening gathering
+62,B,Setting up the team voice time
+62,C,Setting up the team only bridge
+62,D,On the start of work session
+63,A,Scheduling the start of work session
+63,B,For the progress review slot
+63,C,On the start of work session
+63,D,Setting up the gate check
+64,A,Scheduling the senior circle time
+64,B,Scheduling the executive forum slot
+64,C,On the alignment beat
+64,D,Setting up the recurring cadence
+65,A,Setting up the voice connection
+65,B,Booking the check point session
+65,C,For the visual pass
+65,D,Scheduling the voice connection
+66,A,Booking the progress review slot
+66,B,Setting up the recurring cadence
+66,C,Scheduling the seven day touchpoint
+66,D,Planning the progress review slot
+67,A,Planning the skills day
+67,B,On the seven day touchpoint
+67,C,Planning the skills build day
+67,D,Booking the seven day touchpoint
+68,A,Booking the alignment beat
+68,B,Planning the senior circle time
+68,C,On the top of house conversation
+68,D,For the alignment beat
+69,A,On the opening gathering
+69,B,Setting up the launch sit down
+69,C,Scheduling the partner huddle
+69,D,Scheduling the executive forum slot
+70,A,Planning the direction setting day
+70,B,Planning the check point session
+70,C,On the focused cohort day
+70,D,Planning the layout critique
+71,A,For the feedback pass
+71,B,Setting up the voice window
+71,C,Planning the time window
+71,D,Planning the short loop
+72,A,On the critique round
+72,B,Scheduling the line up
+72,C,About the sit down
+72,D,For the deep dive
+73,A,About the line up
+73,B,Setting up the alignment talk
+73,C,Setting up the time window
+73,D,Scheduling the working session
+74,A,Scheduling the working session
+74,B,Setting up the check pass
+74,C,About the audio bridge
+74,D,For the short loop
+75,A,Planning the working session
+75,B,For the critique round
+75,C,For the short loop
+75,D,About the time window
+76,A,Scheduling the agenda talk
+76,B,Scheduling the catch up
+76,C,Scheduling the audio bridge
+76,D,About the feedback pass
+77,A,Booking the focused block
+77,B,Booking the feedback pass
+77,C,Planning the audio bridge
+77,D,On the scheduled slot
+78,A,For the deep dive
+78,B,On the touch base
+78,C,Setting up the scheduled slot
+78,D,Scheduling the audio bridge
+79,A,Scheduling the time window
+79,B,Planning the focused day
+79,C,For the touch base
+79,D,Booking the check pass
+80,A,Scheduling the look over
+80,B,Scheduling the short loop
+80,C,Planning the look over
+80,D,Planning the focused block
+81,A,About the deep dive
+81,B,Planning the touch base
+81,C,For the critique round
+81,D,Booking the focused block
+82,A,Setting up the look over
+82,B,About the deep dive
+82,C,For the look over
+82,D,For the critique round
+83,A,Workstream Heath progress update
+83,B,Project Alder progress update
+83,C,Stream Cascade delivery status
+83,D,Project Indigo migration plan
+84,A,Stream Driftwood milestone note
+84,B,Initiative Vanilla rollout update
+84,C,Project Alder migration plan
+84,D,Program Slate migration plan
+85,A,Stream Driftwood progress update
+85,B,Program Magnolia rollout update
+85,C,Program Slate migration plan
+85,D,Program Kestrelhawk milestone note
+86,A,Initiative Vanilla progress update
+86,B,Initiative Oleander migration plan
+86,C,Project Horizon progress update
+86,D,Initiative Oleander progress update
+87,A,Initiative Sequoia rollout update
+87,B,Project Drift rollout update
+87,C,Program Tusk migration plan
+87,D,Stream Alyssum rollout update
+88,A,Project Evergreen rollout update
+88,B,Program Opal rollout update
+88,C,Program Quince migration plan
+88,D,Initiative Quill migration plan
+89,A,Stream Driftwood delivery status
+89,B,Program Opal delivery status
+89,C,Program Slate milestone note
+89,D,Program Redwood migration plan
+90,A,Project Garnet delivery status
+90,B,Workstream Larch rollout update
+90,C,Program Opal migration plan
+90,D,Project Alder migration plan
+91,A,Regarding the release checkpoint
+91,B,Tracking the ship gate
+91,C,Tracking the status read
+91,D,About the held up items
+92,A,Regarding the seven day read
+92,B,Status: the staged rollout path
+92,C,Update: the seven day pulse
+92,D,Note on the stepped release
+93,A,Tracking the artifact handoff
+93,B,Heads up on the staged rollout path
+93,C,Update: the in progress cut
+93,D,Note on the release window
+94,A,Tracking the ship readiness gate
+94,B,Heads up on the bar check
+94,C,Status: the bar check
+94,D,Regarding the gate review slot
+95,A,Update: the held up items
+95,B,Regarding the quality threshold pass
+95,C,About the standards gate
+95,D,About the stalled pieces
+96,A,About the transition step
+96,B,Regarding the stepped release
+96,C,Note on the stepped release
+96,D,Regarding the platform swap
+97,A,Update: the halfway cut
+97,B,Tracking the transition step
+97,C,Note on the content cutover
+97,D,Update: the in progress cut
+98,A,Heads up on the seven day read
+98,B,Note on the artifact handoff
+98,C,About the ready to release piece
+98,D,Regarding the status read
+99,A,Regarding the stalled pieces
+99,B,Heads up on the information shift
+99,C,Note on the content cutover
+99,D,Regarding the held up items
+100,A,Status: the release window
+100,B,Note on the content cutover
+100,C,Status: the transition step
+100,D,Update: the release window
+101,A,Heads up on the geographic spread
+101,B,Tracking the platform swap
+101,C,Heads up on the host transition
+101,D,Heads up on the territory sweep
+102,A,About the held up items
+102,B,Heads up on the release checkpoint
+102,C,About the stalled pieces
+102,D,Note on the ship gate
+103,A,About the status read
+103,B,Tracking the stalled pieces
+103,C,Status: the weekly snapshot
+103,D,Regarding the status read
+104,A,Heads up on the incremental push
+104,B,Heads up on the geographic spread
+104,C,Tracking the incremental push
+104,D,Regarding the territory sweep
+105,A,Heads up on the release window
+105,B,About the incremental push
+105,C,Update: the release checkpoint
+105,D,Status: the release checkpoint
+106,A,Status: the host transition
+106,B,Status: the transition step
+106,C,Tracking the partial draft
+106,D,Update: the in progress cut
+107,A,Update: the bar check
+107,B,Tracking the completed artifact
+107,C,Tracking the bar check
+107,D,Note on the closeout package
+108,A,Heads up on the quality threshold pass
+108,B,Note on the gate review slot
+108,C,Heads up on the records move
+108,D,Update: the records move
+109,A,Status: the release window
+109,B,Regarding the weekly snapshot
+109,C,Status: the status read
+109,D,Status: the territory sweep
+110,A,Note on the transition step
+110,B,Note on the platform switch
+110,C,Heads up on the weekly snapshot
+110,D,Update: the status read
+111,A,Status: the release window
+111,B,Note on the artifact handoff
+111,C,Heads up on the status read
+111,D,Note on the completed artifact
+112,A,Heads up on the pulse report
+112,B,About the finished artifact
+112,C,Status: the switchover
+112,D,Note on the benchmark line
+113,A,About the next push
+113,B,Tracking the checkpoint
+113,C,Status: the cutover
+113,D,Regarding the handed off piece
+114,A,Update: the ready version
+114,B,Tracking the current snapshot
+114,C,Note on the staged cycle
+114,D,Update: the transition path
+115,A,Regarding the mile marker
+115,B,About the handed off piece
+115,C,Tracking the current snapshot
+115,D,Tracking the deployment arc
+116,A,Heads up on the checkpoint
+116,B,Regarding the cutover
+116,C,Heads up on the next push
+116,D,Regarding the ongoing view
+117,A,About the latest posture
+117,B,Status: the mile marker
+117,C,Tracking the finished artifact
+117,D,Note on the cutover
+118,A,Regarding the checkpoint
+118,B,Tracking the moved state
+118,C,Status: the ongoing view
+118,D,About the next push
+119,A,Regarding the pulse report
+119,B,About the staged cycle
+119,C,Status: the moved state
+119,D,Regarding the mile marker
+120,A,About the deployment arc
+120,B,Heads up on the pulse report
+120,C,Heads up on the cutover
+120,D,Tracking the mile marker
+121,A,Heads up on the cutover
+121,B,Update: the mile marker
+121,C,Status: the progress gate
+121,D,Regarding the moved state
+122,A,Note on the mile marker
+122,B,Regarding the current snapshot
+122,C,Tracking the transition path
+122,D,Update: the progress gate
+123,A,Note on the progress gate
+123,B,Note on the pulse report
+123,C,Status: the progress gate
+123,D,Update: the latest posture
+124,A,Larkfield Books partnership
+124,B,Alpenglow Forms proposal
+124,C,Nimbly partnership
+124,D,Tundra Pulse proposal
+125,A,Cirrus Atlas partnership
+125,B,Antler HR demo
+125,C,Quilldesk proposal
+125,D,Kestrelmail partnership
+126,A,Glacier Storage partnership
+126,B,Larkfield Books demo
+126,C,Saffron Docs partnership
+126,D,Mossbank pricing
+127,A,Kestrelmail proposal
+127,B,Willow Messenger proposal
+127,C,Jetstream Retail solution
+127,D,Keeper Vault proposal
+128,A,Zephyr Relay partnership
+128,B,Rook Identity partnership
+128,C,Umbra Console partnership
+128,D,Cascade Desk pricing
+129,A,Rook Identity demo
+129,B,Ember Notebook proposal
+129,C,Verbena Insights pricing
+129,D,Tundra Pulse proposal
+130,A,Saffron Docs demo
+130,B,Thicket Planner solution
+130,C,Prairie Pilot demo
+130,D,Quorum Voice partnership
+131,A,Indigo Tracker pricing
+131,B,Tundra Pulse pricing
+131,C,Cirrus Atlas partnership
+131,D,Hermit Mail demo
+132,A,Sharing the top tier alliance
+132,B,Exploring the top tier commercial view
+132,C,Discussing the collaboration thread
+132,D,Considering the commercial terms
+133,A,Sharing the product walkthrough
+133,B,About the interactive look
+133,C,Following up on the top tier alliance
+133,D,Discussing the collaboration thread
+134,A,Following up on the commercial terms
+134,B,Exploring the hands on session
+134,C,Considering the large account frame
+134,D,Discussing the hands on session
+135,A,About the bundled approach
+135,B,Following up on the bundled approach
+135,C,Sharing the managed path
+135,D,Exploring the managed path
+136,A,About the packaged fit
+136,B,Considering the packaged fit
+136,C,Next on the written pitch
+136,D,Sharing the written pitch
+137,A,Following up on the continuation draft
+137,B,Sharing the interactive look
+137,C,About the deep dive view
+137,D,About the continuation ask
+138,A,Considering the product walkthrough
+138,B,Discussing the top tier alliance
+138,C,Considering the collaboration thread
+138,D,Following up on the leader preview slot
+139,A,Discussing the large client framing
+139,B,Sharing the product walkthrough
+139,C,Next on the leadership preview
+139,D,Considering the large account frame
+140,A,Next on the commercial terms
+140,B,Exploring the bespoke write up
+140,C,Following up on the commercial terms
+140,D,About the bespoke write up
+141,A,Next on the managed platform option
+141,B,About the roll forward pitch
+141,C,Discussing the written pitch
+141,D,Considering the on platform option
+142,A,Exploring the top tier walkthrough
+142,B,Sharing the bespoke write up
+142,C,Discussing the leader preview slot
+142,D,Exploring the tailored offer
+143,A,Next on the reduced offer
+143,B,Following up on the written pitch
+143,C,Considering the reduced rate frame
+143,D,Considering the continuation ask
+144,A,Next on the reduced offer
+144,B,Discussing the on platform option
+144,C,Considering the reduced rate frame
+144,D,Next on the managed path
+145,A,Following up on the hands on session
+145,B,Following up on the packaged fit
+145,C,Following up on the managed platform option
+145,D,Exploring the product walkthrough
+146,A,About the reseller motion
+146,B,Next on the reseller motion
+146,C,Sharing the leader preview slot
+146,D,About the leader preview slot
+147,A,Next on the collaboration thread
+147,B,Discussing the written pitch
+147,C,Next on the continuation ask
+147,D,Following up on the reseller motion
+148,A,About the product walkthrough
+148,B,Next on the product walkthrough
+148,C,Following up on the product walkthrough
+148,D,Next on the deep dive view
+149,A,Discussing the combined set up
+149,B,Considering the large account frame
+149,C,Exploring the combined set up
+149,D,About the large account frame
+150,A,Next on the bundled approach
+150,B,Discussing the continuation draft
+150,C,Discussing the written pitch
+150,D,Sharing the packaged fit
+151,A,Exploring the top tier walkthrough
+151,B,Exploring the managed path
+151,C,Sharing the reduced offer
+151,D,Next on the product walkthrough
+152,A,Exploring the packaged fit
+152,B,Following up on the tailored offer
+152,C,About the tailored offer
+152,D,Sharing the interactive look
+153,A,Discussing the guided tour
+153,B,Sharing the offer terms
+153,C,Next on the framed offer
+153,D,Next on the shared motion
+154,A,Exploring the live look
+154,B,Considering the chosen path
+154,C,Exploring the joint effort
+154,D,Sharing the number sheet
+155,A,Discussing the joint effort
+155,B,Considering the written plan
+155,C,About the live look
+155,D,Sharing the chosen path
+156,A,Following up on the written ask
+156,B,About the walkthrough
+156,C,Considering the commercial side
+156,D,Next on the fit picture
+157,A,About the best match
+157,B,Discussing the written plan
+157,C,Following up on the alliance path
+157,D,Considering the number sheet
+158,A,Next on the written plan
+158,B,Next on the preview session
+158,C,Considering the shared motion
+158,D,Discussing the commercial side
+159,A,About the number sheet
+159,B,Discussing the teaming setup
+159,C,Discussing the preview session
+159,D,Considering the chosen path
+160,A,Following up on the chosen path
+160,B,Exploring the preview session
+160,C,Discussing the shared motion
+160,D,About the written ask
+161,A,Considering the written plan
+161,B,Next on the guided tour
+161,C,Next on the answer frame
+161,D,Discussing the commercial side
+162,A,Considering the framed offer
+162,B,Exploring the commercial side
+162,C,Following up on the answer frame
+162,D,About the walkthrough
+163,A,Next on the walkthrough
+163,B,Considering the answer frame
+163,C,Discussing the commercial side
+163,D,Next on the framed offer
+164,A,Discussing the live look
+164,B,Next on the number sheet
+164,C,Discussing the best match
+164,D,Sharing the commercial side
+165,A,Elmwater Partners resolution summary
+165,B,Kilnwood support ticket
+165,C,Bracknell Systems support ticket
+165,D,Skybound Parts escalation
+166,A,Bracknell Systems support ticket
+166,B,Nettlebrook support ticket
+166,C,Yellowash incident note
+166,D,Parsec Holdings support ticket
+167,A,Opalstream issue update
+167,B,Dartmoor Vault issue update
+167,C,Croydon Petrochemical escalation
+167,D,Sailwater Group issue update
+168,A,Bracknell Systems support ticket
+168,B,Mistveil issue update
+168,C,Claxton Industries support ticket
+168,D,Vantage Chem support ticket
+169,A,Duneford Trading resolution summary
+169,B,Loomwright support ticket
+169,C,Ravenwood resolution summary
+169,D,Underbrook resolution summary
+170,A,Parsec Holdings resolution summary
+170,B,Zenterra incident note
+170,C,Glenmore Ops issue update
+170,D,Bracknell Systems support ticket
+171,A,Keystone Roast resolution summary
+171,B,Claxton Industries incident note
+171,C,Glenmore Ops escalation
+171,D,Quintessa Labs incident note
+172,A,Nettlebrook escalation
+172,B,Rookhaven escalation
+172,C,Joystar resolution summary
+172,D,Quintessa Labs incident note
+173,A,About the cluster bundle
+173,B,Status: the policy owner path
+173,C,Status: the raised priority path
+173,D,Status: the case load entry
+174,A,On the protection flag log
+174,B,Status: the cluster queue
+174,C,Note on the grouped cases
+174,D,Status: the disruption record
+175,A,On the case load entry
+175,B,Note on the disruption record
+175,C,Following up on the service drop event
+175,D,Status: the high priority entry
+176,A,About the high priority entry
+176,B,Status: the priority item
+176,C,Note on the policy owner path
+176,D,Update: the counsel handoff
+177,A,Regarding the user flagged gap
+177,B,Update: the closure notes
+177,C,On the noted concern
+177,D,Status: the interim patch
+178,A,On the cluster queue
+178,B,Regarding the protection event
+178,C,On the grouped cases
+178,D,Update: the protection flag log
+179,A,Status: the backslide report
+179,B,Following up on the counsel handoff
+179,C,Following up on the policy owner path
+179,D,Note on the flagged concern
+180,A,Note on the flagged concern
+180,B,Following up on the service drop event
+180,C,Status: the flagged concern
+180,D,Following up on the downtime record
+181,A,About the reintroduced glitch
+181,B,On the closure notes
+181,C,About the backslide trace
+181,D,Update: the closure notes
+182,A,Following up on the closure notes
+182,B,Update: the flagged concern
+182,C,Following up on the backslide trace
+182,D,On the durable fix
+183,A,Update: the user flagged gap
+183,B,Following up on the leadership lift
+183,C,Regarding the leadership lift
+183,D,Status: the flagged concern
+184,A,Following up on the safety trigger
+184,B,Note on the disruption record
+184,C,On the interim patch
+184,D,Update: the temporary bridge
+185,A,About the priority item
+185,B,Regarding the grouped cases
+185,C,Following up on the urgent case
+185,D,About the cluster queue
+186,A,Following up on the disruption record
+186,B,Following up on the protection flag log
+186,C,Update: the noted concern
+186,D,Status: the user raised item
+187,A,Following up on the noted concern
+187,B,On the disruption record
+187,C,About the service drop log
+187,D,Note on the user raised item
+188,A,Regarding the temporary bridge
+188,B,Following up on the noted concern
+188,C,Status: the user raised item
+188,D,Status: the interim patch
+189,A,Note on the long term fix write up
+189,B,Regarding the long term fix write up
+189,C,Note on the downtime record
+189,D,Regarding the service drop log
+190,A,Status: the priority item
+190,B,Status: the durable fix
+190,C,About the priority item
+190,D,Note on the closure notes
+191,A,Status: the backslide trace
+191,B,Status: the user flagged gap
+191,C,Update: the high priority entry
+191,D,Note on the backslide report
+192,A,Update: the leadership lift
+192,B,On the closure notes
+192,C,On the raised priority path
+192,D,Update: the policy owner path
+193,A,Following up on the grouped cases
+193,B,Note on the safety trigger
+193,C,About the leadership elevated flag
+193,D,On the cluster queue
+194,A,Following up on the final state
+194,B,Status: the disruption footprint
+194,C,Regarding the raised concern
+194,D,Following up on the elevated flag
+195,A,On the tracked item
+195,B,Regarding the higher tier path
+195,C,Status: the interruption window
+195,D,Update: the flagged item
+196,A,Note on the interruption window
+196,B,Following up on the final state
+196,C,Following up on the higher tier path
+196,D,Note on the standing entry
+197,A,Following up on the noted gap
+197,B,About the wrap up
+197,C,Regarding the higher tier path
+197,D,Note on the standing entry
+198,A,About the flagged episode
+198,B,About the closing note
+198,C,Update: the noted gap
+198,D,Following up on the standing entry
+199,A,On the noted gap
+199,B,About the closing note
+199,C,Note on the flagged episode
+199,D,Note on the raised priority
+200,A,Note on the elevated flag
+200,B,On the interruption window
+200,C,Status: the flagged item
+200,D,On the logged note
+201,A,Regarding the wrap up
+201,B,About the tracked item
+201,C,Update: the flagged episode
+201,D,Note on the higher tier path
+202,A,Following up on the observed snag
+202,B,Update: the elevated flag
+202,C,On the tracked item
+202,D,Following up on the wrap up
+203,A,Status: the event record
+203,B,Note on the open case
+203,C,Following up on the closing note
+203,D,Status: the higher tier path
+204,A,Regarding the elevated flag
+204,B,Status: the event record
+204,C,Regarding the event record
+204,D,About the open case
+205,A,On the elevated flag
+205,B,Note on the disruption footprint
+205,C,Following up on the tracked item
+205,D,Regarding the higher tier path

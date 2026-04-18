@@ -1,0 +1,242 @@
+Problem Description
+ONNX Autopsy: Recovering Neural Architectures from Optimized Binary Graphs
+Domain: Sequence-to-Sequence | Difficulty: Hard | Scoring: ↑ Higher is better
+
+Overview
+Every neural network you deploy goes through a one-way transformation: the ONNX graph optimizer restructures the model's computation graph for hardware efficiency, erasing the human-readable architecture in the process.
+
+Conv2d + BatchNorm2d + ReLU collapses into a single opaque fused kernel — two layers vanish from the binary.
+GELU becomes five arithmetic nodes, or zero, depending on the optimization path.
+MultiheadAttention shatters into a tangle of MatMul, scale factors, and Softmax operations.
+Dropout disappears entirely — removed as a training-only artifact.
+Your challenge: given only the raw bytes of an ONNX computation graph after ORT Level-3 optimization, train a byte-level language model from scratch that can reconstruct the original PyTorch layer sequence — in exact forward-pass execution order.
+
+This is a foundational, from-scratch model training challenge. Standard pretrained models are completely blind to ONNX bytecode. You cannot rely on zero-shot inference, pretrained encoders, or fine-tuning. You must build and train a custom byte-level architecture capable of inverting the ONNX graph optimizer's transformations.
+
+The Pretraining Traps (Why Standard Models Fail)
+The Tokenizer Massacre
+Standard BPE tokenizers, trained on human language, have no concept of ONNX protobuf structure. The protobuf wire format uses varint-encoded field tags — every integer in the binary is encoded as (field_number << 3) | wire_type, a scheme utterly foreign to text tokenizers. BPE will slice through instruction boundaries, splitting semantically atomic byte sequences into meaningless fragments. You must build a custom byte-level tokenizer trained or designed specifically for this hex-encoded binary format.
+
+The Graph Optimizer Scramble
+ORT Level-3 optimization (ORT_ENABLE_ALL) transforms the ONNX graph in ways that make the original architecture unrecognizable:
+
+Conv-BN fusion absorbs BatchNorm2d into Conv2d's bias — the BatchNorm layer disappears from the graph
+Activation fusion merges ReLU, SiLU, and Mish into preceding convolution nodes
+QKV projection fusion collapses three separate Linear layers (Query, Key, Value) into a single projection node
+Dead node pruning removes Dropout entirely (training-only), yet the ground truth still includes it
+The count of nodes in the optimized ONNX graph does NOT equal the count of layers in the original model. Your model must learn to reconstruct the hidden layer count and composition.
+
+The Semantic Inversion Problem
+Even if you write a custom binary parser and extract all op type strings from the optimized graph, you still cannot solve this challenge with rules alone. A single fused kernel could have come from 2, 3, or 4 original layers depending on the presence of BatchNorm, the specific activation, and whether Dropout was inserted between them. The inverse mapping requires learned inference from byte-level patterns — not lookup tables.
+
+Quadratic Context Choking
+Deep Transformer and ResNet architectures produce ONNX hex strings of 10,000–20,000 characters. Standard attention mechanisms will OOM at this context length. You will need FlashAttention-2, a linear-scaling architecture (Mamba, RWKV), or aggressive chunking strategies to handle the hardest examples.
+
+Dataset
+You are provided with a constrained dataset of 10,000 ONNX computation graph samples spanning 6 neural architecture families.
+
+File Descriptions
+File	Description
+train.csv	8,000 training samples with both the ONNX hex inputs and the ground-truth layer sequences
+test.csv	2,000 test samples with the labels hidden
+sample_submission.csv	Baseline submission with all predictions set to "[]"
+Data Dictionary
+Column	Type	Description
+id	String	Unique identifier for the ONNX model sample (e.g., onnx_a3f2b9c1d8e7)
+onnx_hex	String	The fully stripped, ORT Level-3 optimized ONNX computation graph, serialized as a hex string. Weights are stripped; only graph topology and tensor shapes remain. Node names are anonymized; op type names are obfuscated with competition-specific aliases. (Present in both train and test)
+target_sequence	String	The ground truth label formatted as a valid JSON array string. The ordered sequence of PyTorch leaf module types in forward-pass execution order, including Dropout even though it does not appear in the ONNX bytes. (Present only in train.csv)
+Architecture Families
+The dataset spans 6 neural architecture families of varying complexity:
+
+Family	Description
+pure_mlp	2–10 Linear layers with activations, Dropout, BatchNorm1d
+cnn	2–8 Conv2d blocks with MaxPool, BatchNorm2d, activations; Flatten + Linear head
+resnet_style	Conv2d blocks with residual skip connections and BatchNorm2d
+transformer_micro	1–4 Transformer blocks with MultiheadAttention, LayerNorm, GELU FFN
+rnn_based	1–3 LSTM / GRU / RNN layers with Linear projection
+hybrid	Combinations: CNN+MLP, CNN+LSTM, Transformer+MLP
+The test set overweights Hard and Hybrid architectures relative to training — models that only learn simple sequential patterns will not generalize.
+
+Layer Vocabulary
+Your model predicts sequences drawn from this fixed vocabulary of 41 PyTorch module types:
+
+Conv1d, Conv2d, Conv3d, ConvTranspose1d, ConvTranspose2d  
+BatchNorm1d, BatchNorm2d, BatchNorm3d, LayerNorm, GroupNorm, InstanceNorm2d  
+ReLU, GELU, SiLU, Mish, Sigmoid, Tanh, LeakyReLU, ELU, PReLU,  
+  Hardswish, Hardtanh, ReLU6, Softmax  
+MaxPool1d, MaxPool2d, AvgPool1d, AvgPool2d, AdaptiveAvgPool2d  
+Dropout, Dropout2d, AlphaDropout  
+LSTM, GRU, RNN  
+MultiheadAttention  
+Linear, Embedding, Bilinear  
+Flatten, Upsample, PixelShuffle  
+Evaluation
+Submissions are evaluated using Mean Normalized Edit Distance (NED) — the same metric used in the MIPS32 Autopsy challenge.
+
+Because you are predicting a chronological sequence of layer executions, standard accuracy is insufficient. You receive partial credit for predicting the correct layer types with minor insertion, deletion, or transposition errors.
+
+For a single row, NED is:
+
+NED = 1.0 - LevenshteinDistance(predicted_list, true_list) / max(len(predicted_list), len(true_list))  
+The final leaderboard score is the mean NED across all 2,000 test rows.
+
+import json  
+from Levenshtein import distance as lev_distance  # pip install python-Levenshtein  
+  
+def ned(pred_json: str, true_json: str) -> float:  
+    try:  
+        pred = json.loads(pred_json)  
+        true = json.loads(true_json)  
+    except Exception:  
+        return 0.0  
+    if not isinstance(pred, list) or not isinstance(true, list):  
+        return 0.0  
+    if not pred and not true:  
+        return 1.0  
+    dist = lev_distance(pred, true)  
+    return 1.0 - dist / max(len(pred), len(true))  
+Prediction	NED
+Perfect match	1.0
+Off by one layer (insertion or deletion)	~0.85–0.95
+Correct types, wrong order	~0.50–0.80
+Completely wrong	0.0
+Malformed JSON	0.0
+Baseline scores:
+
+Always predict []: 0.0
+Always predict ["Linear", "ReLU", "Linear"]: ~0.12
+Classical protobuf parser alone: ~0.40–0.55 (limited by semantic inversion)
+Competitive target: > 0.65
+Strong solution: > 0.80
+Rules
+Hard Rules (violation = disqualification)
+No pretrained weights. Your model must be initialized randomly and trained only on train.csv. HuggingFace checkpoints, PyTorch Hub models, timm, and any other pretrained weight source are prohibited.
+
+No ONNX parsing libraries at inference time. The onnx and onnxruntime Python libraries are prohibited at inference time. Your model must ingest the raw hex string (or its binary equivalent) directly. A custom pure-Python binary parser is allowed as preprocessing but must be disclosed.
+
+Custom tokenizer required. Pre-trained tokenizers (HuggingFace AutoTokenizer, tiktoken, SentencePiece, GPT-2 BPE, etc.) are prohibited. Your tokenizer must be designed or trained from scratch for this hex-encoded binary format.
+
+No external data. You may not use any external dataset, corpus, or synthetic data source during training. Only train.csv (and val splits derived from it) are permitted.
+
+Reproducibility. Your training script must set torch.manual_seed(42) and produce the same submission when re-run. Include the full training code in your submission.
+
+What IS Allowed
+Any model architecture (Transformer, Mamba, RWKV, CNN, SSM, hybrid)
+FlashAttention-2, custom CUDA kernels, mixed precision training
+Any optimizer, learning rate schedule, or regularization
+Curriculum learning (e.g., training on easy examples first)
+Data augmentation on the training set (e.g., permuting layer order for augmentation — but note this may hurt performance if overdone)
+Reading ONNX documentation to understand the format (for tokenizer design)
+Submission Format
+Submit a CSV file with exactly 2,000 rows and two columns:
+
+id	target_sequence
+onnx_a3f2b9c1d8e7	["Conv2d", "BatchNorm2d", "ReLU", "MaxPool2d", "Linear"]
+onnx_f456c1b8a9e2	["Linear", "Dropout", "GELU", "Linear"]
+onnx_0000deadbeef	[]
+Critical: target_sequence must be a valid, stringified JSON array. If your model produces conversational text, a Python list literal, or any other non-JSON-array format, the grader will assign 0.0 for that row.
+
+Getting Started
+# 1. Install dependencies  
+pip install torch onnx onnxruntime python-Levenshtein pandas tqdm  
+  
+# 2. Explore the training data  
+python - <<'EOF'  
+import pandas as pd, json  
+train = pd.read_csv("train.csv")  
+print(train.shape)  
+print(train["target_sequence"].iloc[0])  
+print(f"Hex length range: {train['onnx_hex'].str.len().min()}–{train['onnx_hex'].str.len().max()}")  
+EOF  
+  
+# 3. Build your tokenizer (example: character-level on hex chars)  
+# hex alphabet: 0123456789abcdef  (16 chars)  
+# Consider: fixed 2-char chunks (bytes), 8-char chunks (4-byte words), learned BPE on hex  
+  
+# 4. Train your model, save predictions  
+# model.eval()  
+# predictions = []  
+# for id_, hex_str in zip(test["id"], test["onnx_hex"]):  
+#     pred_sequence = model.predict(hex_str)  # → list[str]  
+#     predictions.append({"id": id_, "target_sequence": json.dumps(pred_sequence)})  
+  
+# 5. Submit  
+# pd.DataFrame(predictions).to_csv("submission.csv", index=False)  
+ 
+
+Expected Output
+Output to ./working/submission.csv
+
+
+general rules of submission from shipd docs:
+
+A solution is a Jupyter notebook (solution.ipynb or a solution.py) that solves a challenge end-to-end. As a challenge creator, your solution proves solvability and validates the grader. As a solver, you compete on the leaderboard for a share of the $1,150-$1,250 prize pool. Solutions run in a Docker environment with Kaggle Docker libraries (pandas, numpy, scikit-learn, xgboost, lightgbm, tensorflow, pytorch, etc.).
+
+Requirements
+Self-contained — must run end-to-end without manual intervention
+Reads from ./dataset/public/ — use relative paths
+Writes only to ./working/ — outputs submission.csv
+Uses only standard Kaggle Docker libraries
+Completes in under 30 minutes (64GB RAM, NVIDIA A10G, 24GB VRAM)
+python:
+import pandas as pd
+
+# Reading data
+train = pd.read_csv('./dataset/public/train.csv')
+test = pd.read_csv('./dataset/public/test.csv')
+
+# Writing submission
+submission.to_csv('./working/submission.csv', index=False)
+
+Iterative Submissions
+We want to see your progression — not just a single final answer. Submit multiple solutions as you improve your approach. Each submission should be a solid attempt, not a rough draft.
+
+1
+First Submission — Solid Starting Point
+Data pipeline is correct, model runs end-to-end, and you're getting reasonable results.
+
+2
+Middle Submissions — Incremental Improvements
+Try feature engineering, hyperparameter tuning, or different model architectures. Each submission should show measurable progress from the previous one.
+
+3
+Final Submission — Best Effort
+Your most refined submission with the most optimal model.
+
+We recommend 3-5 solutions showing incremental improvement. Each should be a complete, working solution — not rough drafts, but genuine attempts at solving the challenge.
+Submission Credits
+Each challenge uses a credit system that limits how often you can submit solutions.
+
+Parameter	Value
+Max credits per problem	6
+Refill rate	1 every 4 hours
+Full refill time	24 hours
+Scope	Per problem (independent pools)
+Credits are consumed only on submit — creating drafts, running checks, or editing does not cost credits. Make each submission count.
+Prize Structure
+Each challenge has a $1,150-$1,250 prize pool split between the challenge creator, solvers, and rubric authors.
+
+Pool	Amount	Who receives it
+Creator	$400-$500	Challenge author (scales with novelty)
+Leaderboard	$500	1st: $250 · 2nd: $150 · 3rd: $100
+Solution	$150	Split by merit among solvers who beat the AI baseline
+Rubric	$100	Best accepted rubric submission
+You must beat the AI baseline to earn a payout. When a challenge is created, an AI agent attempts it to establish a baseline score. Only solutions that outperform this baseline are eligible for solver payouts.
+Payout Lifecycle
+After a challenge closes, payouts move through three statuses before reaching your Stripe account.
+
+Pending
+Payout computed and recorded, but not yet sent to Stripe.
+Processing
+Stripe transfer created and in transit. Typically 1-2 business days.
+Paid
+Transfer complete. Funds are in your Stripe account.
+Stripe account required. Payouts remain Pending until you have a connected Stripe account. Your earnings are safe — they'll be processed once connected. Go to shipd.ai/payouts to set up your account.
+Checklist
+Solution script runs end-to-end without errors
+Uses only Kaggle Docker environment libraries
+Reads from ./dataset/public/, writes to ./working/submission.csv
+Achieves a reasonable score (validates the task is solvable)
+Comments explain your reasoning at each step
+Clear progression from baseline to optimized (if submitting multiple)
+Rubrics

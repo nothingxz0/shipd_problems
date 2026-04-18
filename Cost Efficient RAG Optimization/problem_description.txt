@@ -1,0 +1,131 @@
+Overview
+In production retrieval-augmented generation (RAG) systems, every retrieved token costs money and competes for limited context window space. Retrieving too many passages dilutes the model's attention and inflates API costs, while retrieving too few risks missing critical evidence. The most effective RAG pipelines must solve an optimization problem: find the minimum evidence needed for a correct answer.
+
+This challenge tests your ability to build a cost-efficient RAG system that balances answer quality against retrieval cost. Each query comes with a pool of 10–25 candidate document chunks drawn from heterogeneous knowledge sources (text passages, table excerpts, and knowledge-graph triples). Your system must:
+
+Select evidence efficiently — choose only the chunks that are essential for answering, avoiding irrelevant or redundant context
+Answer the question — produce a short answer grounded in the selected evidence
+The scoring metric explicitly rewards precision and compression: systems that answer correctly while selecting fewer, more targeted chunks outscore systems that dump the entire pool into context.
+
+Evaluation
+Submissions are scored using a composite answer quality + retrieval efficiency metric:
+
+score = 0.5 x answer_F1 + 0.5 x evidence_efficiency
+
+Where:
+
+answer_F1 is the token-level F1 between predicted and gold answer (after lowercasing, removing articles and punctuation)
+evidence_efficiency combines two signals:
+Evidence precision: what fraction of your selected chunks are actually gold evidence
+Context compression: what fraction of the total pool you chose NOT to include
+evidence_efficiency = 0.3 + 0.4 x precision + 0.3 x compression
+
+precision = |selected_chunks ∩ gold_chunks| / |selected_chunks|
+compression = 1 - |selected_chunks| / total_pool_size
+The evidence_efficiency component ranges from 0.3 (selected everything, none gold) to 1.0 (selected only gold evidence, left everything else out). The additive formulation rewards both dimensions independently: a system with poor answers but excellent retrieval still earns partial credit, and vice versa. Higher is better.
+
+Submission Format
+Submit a CSV file with three columns:
+
+id — the query identifier (hash-based string)
+evidence_ids — comma-separated chunk markers identifying your selected evidence (e.g., "C3,C7"). Leave empty only if you determine no chunk is relevant.
+answer — your predicted answer text
+The file must contain one row per test query. All IDs must be present. Example:
+
+id,evidence_ids,answer
+q_5556508bc0,"C3,C7",Upa River
+q_15a0c3adbe,C2,692
+q_a6af90533b,"C1,C4,C9",Harrison Ford
+Dataset
+Data fields:
+
+id — unique hash-based identifier for each query
+query — the natural-language question
+context — the candidate chunk pool, formatted as [C1] chunk text\n[C2] chunk text\n... where each chunk may be a text passage, table excerpt, or knowledge-graph triple
+num_chunks — number of chunks in the pool
+evidence_ids (train only) — comma-separated markers of gold evidence chunks
+answer (train only) — the gold-standard short answer
+Files:
+
+train.csv — training data with queries, chunk pools, gold evidence, and answers
+test.csv — test data with queries and chunk pools (no evidence or answers)
+sample_submission.csv — a valid submission file with default predictions
+
+
+Expected Output
+Output to ./working/submission.csv
+
+
+
+general rules of submission from shipd docs:
+
+A solution is a Jupyter notebook (solution.ipynb or a solution.py) that solves a challenge end-to-end. As a challenge creator, your solution proves solvability and validates the grader. As a solver, you compete on the leaderboard for a share of the $1,150-$1,250 prize pool. Solutions run in a Docker environment with Kaggle Docker libraries (pandas, numpy, scikit-learn, xgboost, lightgbm, tensorflow, pytorch, etc.).
+
+Requirements
+Self-contained — must run end-to-end without manual intervention
+Reads from ./dataset/public/ — use relative paths
+Writes only to ./working/ — outputs submission.csv
+Uses only standard Kaggle Docker libraries
+Completes in under 30 minutes (64GB RAM, NVIDIA A10G, 24GB VRAM)
+python:
+import pandas as pd
+
+# Reading data
+train = pd.read_csv('./dataset/public/train.csv')
+test = pd.read_csv('./dataset/public/test.csv')
+
+# Writing submission
+submission.to_csv('./working/submission.csv', index=False)
+
+Iterative Submissions
+We want to see your progression — not just a single final answer. Submit multiple solutions as you improve your approach. Each submission should be a solid attempt, not a rough draft.
+
+1
+First Submission — Solid Starting Point
+Data pipeline is correct, model runs end-to-end, and you're getting reasonable results.
+
+2
+Middle Submissions — Incremental Improvements
+Try feature engineering, hyperparameter tuning, or different model architectures. Each submission should show measurable progress from the previous one.
+
+3
+Final Submission — Best Effort
+Your most refined submission with the most optimal model.
+
+We recommend 3-5 solutions showing incremental improvement. Each should be a complete, working solution — not rough drafts, but genuine attempts at solving the challenge.
+Submission Credits
+Each challenge uses a credit system that limits how often you can submit solutions.
+
+Parameter	Value
+Max credits per problem	6
+Refill rate	1 every 4 hours
+Full refill time	24 hours
+Scope	Per problem (independent pools)
+Credits are consumed only on submit — creating drafts, running checks, or editing does not cost credits. Make each submission count.
+Prize Structure
+Each challenge has a $1,150-$1,250 prize pool split between the challenge creator, solvers, and rubric authors.
+
+Pool	Amount	Who receives it
+Creator	$400-$500	Challenge author (scales with novelty)
+Leaderboard	$500	1st: $250 · 2nd: $150 · 3rd: $100
+Solution	$150	Split by merit among solvers who beat the AI baseline
+Rubric	$100	Best accepted rubric submission
+You must beat the AI baseline to earn a payout. When a challenge is created, an AI agent attempts it to establish a baseline score. Only solutions that outperform this baseline are eligible for solver payouts.
+Payout Lifecycle
+After a challenge closes, payouts move through three statuses before reaching your Stripe account.
+
+Pending
+Payout computed and recorded, but not yet sent to Stripe.
+Processing
+Stripe transfer created and in transit. Typically 1-2 business days.
+Paid
+Transfer complete. Funds are in your Stripe account.
+Stripe account required. Payouts remain Pending until you have a connected Stripe account. Your earnings are safe — they'll be processed once connected. Go to shipd.ai/payouts to set up your account.
+Checklist
+Solution script runs end-to-end without errors
+Uses only Kaggle Docker environment libraries
+Reads from ./dataset/public/, writes to ./working/submission.csv
+Achieves a reasonable score (validates the task is solvable)
+Comments explain your reasoning at each step
+Clear progression from baseline to optimized (if submitting multiple)
+Rubrics
